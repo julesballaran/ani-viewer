@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "ani-viewer",
+    "slug": "ani-viewer",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "ani-viewer"
+}
