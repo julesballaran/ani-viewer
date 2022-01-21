@@ -104,7 +104,7 @@ export const searchFn = async (text = "") => {
 }
 
 export const getEpisodeFn = async (text = "") => {
-  const $ = await fetchWeb(`${CORS}/${BASEURL}/category/${text}`)
+  const $ = await fetchWeb(`${BASEURL}/category/${text}`)
 
   let ep = $("#episode_page li").toArray().pop()
   let count = $(ep).find("a").text().split("-").pop()

@@ -12,8 +12,7 @@ import { getEpisodeFn, fetchData, getData, storeData } from "utils/ani"
 import { OpenURLButton } from "components"
 import { favoriteState } from "store/atoms"
 import { useRecoilState } from "recoil"
-
-const proxy = "https://cors-link.herokuapp.com/proxy"
+import { PROXY } from 'utils/constants'
 
 export const Episodes = ({ route }) => {
   const { data } = route.params
@@ -95,7 +94,7 @@ export const Episodes = ({ route }) => {
               {videos.map((video, i) => (
                 <OpenURLButton
                   key={i}
-                  url={`${proxy}/${data.slug}-episode-${current}.mp4?url=${video.file}`}
+                  url={`${PROXY}/${data.slug}-episode-${current}.mp4?url=${video.file}`}
                 >
                   {`${video.label}`}
                 </OpenURLButton>
