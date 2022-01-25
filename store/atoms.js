@@ -9,3 +9,8 @@ export const favoriteState = atom({
   key: "favorites",
   default: [],
 })
+
+export const historyState = atom({
+  key: "history",
+  default: [],
+})

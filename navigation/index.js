@@ -3,17 +3,18 @@ import { SafeAreaProvider } from "react-native-safe-area-context"
 import { NavigationContainer } from "@react-navigation/native"
 import Stacks from "./stacks"
 import { getData } from "utils/ani"
-import { favoriteState } from "store/atoms"
+import { favoriteState, historyState } from "store/atoms"
 import { useSetRecoilState } from "recoil"
 
 const Navigation = () => {
   const setFavorites = useSetRecoilState(favoriteState)
+  const setHistory = useSetRecoilState(historyState)
 
   const fetchData = async () => {
     let tempFav = await getData("favorites")
-    if (tempFav) {
-      setFavorites(tempFav)
-    }
+    let tempHistory = await getData("history")
+    if (tempFav) setFavorites(tempFav)
+    if (tempHistory) setHistory(tempHistory)
   }
 
   useEffect(() => {

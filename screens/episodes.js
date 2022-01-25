@@ -10,13 +10,14 @@ import {
 } from "react-native"
 import { getEpisodeFn, fetchData, getData, storeData } from "utils/ani"
 import { OpenURLButton } from "components"
-import { favoriteState } from "store/atoms"
+import { favoriteState, historyState } from "store/atoms"
 import { useRecoilState } from "recoil"
-import { PROXY } from 'utils/constants'
+import { PROXY } from "utils/constants"
 
 export const Episodes = ({ route }) => {
   const { data } = route.params
   const [favorites, setFavorites] = useRecoilState(favoriteState)
+  const [history, setHistory] = useRecoilState(historyState)
   const [count, setCount] = useState([])
   const [modalVisible, setModalVisible] = useState(false)
   const [videos, setVideos] = useState([])
@@ -33,6 +34,14 @@ export const Episodes = ({ route }) => {
     setCount(ep)
   }
 
+  const saveHistory = async (ep) => {
+    let tempHistory = [...history]
+    tempHistory = tempHistory.filter((h) => h.slug !== data.slug)
+    tempHistory.unshift({ ...data, ep })
+    setHistory(tempHistory)
+    await storeData("history", tempHistory)
+  }
+
   const handleFetch = async (ep) => {
     let w = [...watched]
     if (!w.includes(ep)) {
@@ -40,6 +49,7 @@ export const Episodes = ({ route }) => {
       await storeData(data.slug, w)
       setWatched(w)
     }
+    saveHistory(ep)
     setCurrent(ep)
     const res = await fetchData(data.slug, ep)
     setVideos(res)

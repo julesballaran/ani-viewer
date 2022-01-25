@@ -1,10 +1,34 @@
-import { View, Text } from "react-native"
+import { View, Text, TouchableOpacity, Image } from "react-native"
+import { useRecoilValue } from "recoil"
+import { historyState } from "store/atoms"
+import { SafeAreaView } from "react-native-safe-area-context"
 
-const History = () => {
+const History = ({ navigation }) => {
+  const history = useRecoilValue(historyState)
+
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>History!</Text>
-    </View>
+    <SafeAreaView>
+      <View>
+        {history.map((h) => (
+          <TouchableOpacity
+            key={h.slug}
+            onPress={() =>
+              navigation.navigate("Episodes", {
+                data: h,
+              })
+            }
+            style={{ flexDirection: "row", height: 167 }}
+          >
+            <Image
+              style={{ width: 100 }}
+              source={{ uri: h.img }}
+              resizeMode={"contain"}
+            />
+            <Text>{`${h.title} Episode ${h.ep}`}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </SafeAreaView>
   )
 }
 
