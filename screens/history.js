@@ -8,7 +8,7 @@ const History = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      <View>
+      <View style={{ padding: 12 }}>
         {history.map((h) => (
           <TouchableOpacity
             key={h.slug}
@@ -17,14 +17,16 @@ const History = ({ navigation }) => {
                 data: h,
               })
             }
-            style={{ flexDirection: "row", height: 167 }}
+            style={{ flexDirection: "row", alignItems: "center" }}
           >
             <Image
-              style={{ width: 100 }}
+              style={{ width: 100, height: 140 }}
               source={{ uri: h.img }}
               resizeMode={"contain"}
             />
-            <Text>{`${h.title} Episode ${h.ep}`}</Text>
+            <Text
+              style={{ marginLeft: 12 }}
+            >{`${h.title} Episode ${h.ep}`}</Text>
           </TouchableOpacity>
         ))}
       </View>

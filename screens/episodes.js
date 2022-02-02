@@ -79,7 +79,7 @@ export const Episodes = ({ route }) => {
   }, [])
 
   return (
-    <View>
+    <View style={{ marginBottom: 60 }}>
       <Text style={{ fontSize: 20 }}>{data.title}</Text>
       <Pressable onPress={handleSave}>
         <Text style={{ marginTop: 12, marginLeft: 15 }}>
